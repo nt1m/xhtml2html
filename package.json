@@ -1,0 +1,23 @@
+{
+  "name": "xhtml2html",
+  "version": "1.0.0",
+  "description": "convert xhtml to html",
+  "main": "convert.js",
+  "dependencies": {
+    "xml-js": "^1.6.11"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nt1m/xhtml2html.git"
+  },
+  "author": "Tim Nguyen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nt1m/xhtml2html/issues"
+  },
+  "homepage": "https://github.com/nt1m/xhtml2html#readme"
+}
