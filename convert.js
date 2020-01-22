@@ -1,6 +1,7 @@
 fs = require("fs")
 convert = require("xml-js")
 util = require("util")
+exec = require("child_process").exec
 
 path = process.argv[2]
 
@@ -19,7 +20,15 @@ fs.readFile(path, (err, data) => {
     spaces: 2,
     fullTagEmptyElement: true,
   })
+  xml += "\n"
   console.log(xml)
+  if (process.argv.includes("--write-changes")) {
+    newpath = path.replace(".xhtml", ".html")
+    exec(`hg rename ${path} ${newpath}`, (err, out) => {
+      simpleCallback(err, out)
+      fs.writeFile(newpath, xml, simpleCallback)
+    })
+  }
 })
 
 function stripXmlns(input) {
@@ -34,6 +43,14 @@ function stripXmlns(input) {
 
 function stripXmlDeclaration(input) {
   if (input.declaration) {
-    delete input.declaration;
+    delete input.declaration
+  }
+}
+
+function simpleCallback(err, out) {
+  if (err) {
+    console.log("error", err)
+  } else {
+    console.log("success")
   }
 }
